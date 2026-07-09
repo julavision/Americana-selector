@@ -307,7 +307,21 @@
     <div class="checkbox"></div>
     <div class="card-body">
       <div class="card-top"><span class="card-name">Content Library Rebuild</span><span class="card-price">$900</span></div>
-      <p class="card-desc">Original replacement for Broadridge-licensed content: interactive Social Security &amp; Medicare guide, financial calculators, and starter article library — content you own outright.</p>
+      <p class="card-desc">Your current articles, guides, and calculators are licensed through Broadridge — if you leave, they don't come with you. This rebuilds the library as content you own outright: an interactive Social Security &amp; Medicare guide (replacing the flipbook), retirement and insurance-needs calculators built into the site, and a starter set of educational articles in your voice. No more licensing fees, and every piece doubles as marketing material for social and email.</p>
+    </div>
+  </div>
+  <div class="card" data-price="750" data-type="once" role="checkbox" aria-checked="false" tabindex="0">
+    <div class="checkbox"></div>
+    <div class="card-body">
+      <div class="card-top"><span class="card-name">Client Portal</span><span class="card-price">$750</span></div>
+      <p class="card-desc">A secure, login-protected area where your clients can view and exchange documents with you — statements, policy paperwork, forms — instead of emailing attachments back and forth. Professional, private, and branded to match the site.</p>
+    </div>
+  </div>
+  <div class="card" data-price="500" data-type="once" data-monthly-addon="50" role="checkbox" aria-checked="false" tabindex="0">
+    <div class="checkbox"></div>
+    <div class="card-body">
+      <div class="card-top"><span class="card-name">AI Site Assistant</span><span class="card-price">$500 + $50/mo</span></div>
+      <p class="card-desc">A smart chat assistant on your site that greets visitors, answers questions about your services, offices, and process, and guides them to book a call — 24/7. Designed compliance-first: it informs and routes to you, never gives financial advice. Monthly fee covers hosting, monitoring, and tuning.</p>
     </div>
   </div>
   <h2 class="section-title">Launch &amp; Brand</h2>
@@ -404,9 +418,13 @@
       count++;
       const name = c.querySelector('.card-name').textContent;
       const price = parseInt(c.dataset.price, 10);
+      const monthlyAddon = parseInt(c.dataset.monthlyAddon || '0', 10);
       if (c.dataset.type === 'once') once += price;
       else if (c.dataset.type === 'monthly') monthly += price;
-      items.push(name + ' — ' + fmt(price) + (c.dataset.type === 'monthly' ? '/month' : ''));
+      monthly += monthlyAddon;
+      let label = name + ' — ' + fmt(price) + (c.dataset.type === 'monthly' ? '/month' : '');
+      if (monthlyAddon) label += ' + ' + fmt(monthlyAddon) + '/month';
+      items.push(label);
     });
     return { once, monthly, count, items };
   }
